@@ -2,7 +2,7 @@ import java.lang.Exception
 
 /////////////////////////////////////////////
 //
-// Практическая №1. Массивы, коллекции
+// Практическая №2. Массивы, коллекции
 // Выполнили Турчанинов А.Е.
 // Политехнический колледж городского хозяйства
 // Группа: ИП-23-3
@@ -22,8 +22,8 @@ fun main() {
         является симметричным относительно главной диагонали"""
     )
 
-    var n = 1
-    var m = 1
+    val n: Int
+    val m: Int
 
     try {
         println("Введите количество строк: ")
@@ -38,12 +38,11 @@ fun main() {
     }
 
     val startArray: Array<Array<Int>> = Array(n) { Array(m) { 0 } }
-
-    var resultArray: Array<Array<Int>>? = inputTableArray(startArray, null) ?: return
+    val resultArray = inputTableArray(startArray, null) ?: return
 
     println("Получившаяся таблица: ")
 
-    printTableArray(resultArray!!)
+    printTableArray(resultArray)
 
     if (isSimetrical(resultArray)) {
         println("Результат: Массив является симметричным относительно главной диагонали\n")

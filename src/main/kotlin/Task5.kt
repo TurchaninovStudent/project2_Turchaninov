@@ -1,8 +1,6 @@
-import java.lang.Exception
-
 /////////////////////////////////////////////
 //
-// Практическая №1. Массивы, коллекции
+// Практическая №2. Массивы, коллекции
 // Выполнили Турчанинов А.Е.
 // Политехнический колледж городского хозяйства
 // Группа: ИП-23-3
@@ -23,7 +21,7 @@ fun main() {
     )
 
     println("Введите первый массив (через пробел): ")
-    val targetArray = inputStringArray() ?: return
+    val targetArray = inputStringArray()
 
     println("Получившеся массив: ")
     printStringArray(targetArray)
@@ -48,22 +46,21 @@ private fun groupByUniqueLetters(targetArray: Array<String>): Array<Array<String
             continue
         }
 
-        for (currentGroup in resultList) {
-            var hasSame = false
+        var added = false
 
+        for (currentGroup in resultList) {
             if (hasTheSameLetters(target, currentGroup[0])) {
                 currentGroup.add(target)
-                hasSame = true
+                added = true
                 break
             }
-
-            if (!hasSame) {
-                resultList.add(MutableList(0) {target})
-            }
+        }
+        if (!added) {
+            resultList.add(MutableList(1) {target})
         }
     }
 
-    var resultArray = Array(resultList.size) { Array(resultList.maxOf { it.size }) {""} }
+    val resultArray = Array(resultList.size) { Array(resultList.maxOf { it.size }) {""} }
 
     for (i in 0..resultList.size-1) {
         for (j in 0..resultList[i].size-1) {

@@ -2,7 +2,7 @@ import java.lang.Exception
 
 /////////////////////////////////////////////
 //
-// Практическая №1. Массивы, коллекции
+// Практическая №2. Массивы, коллекции
 // Выполнили Турчанинов А.Е.
 // Политехнический колледж городского хозяйства
 // Группа: ИП-23-3
@@ -24,8 +24,8 @@ fun main() {
         выведется результат: В массиве использовано 5 различных цифр"""
     )
 
-    var n = 1
-    var m = 1
+    val n: Int
+    val m: Int
 
     try {
         println("Введите количество строк: ")
@@ -41,11 +41,11 @@ fun main() {
 
     val startArray: Array<Array<Int>> = Array(n) { Array(m) { 0 } }
 
-    var resultArray: Array<Array<Int>>? = inputTableArray(startArray, 3) ?: return
+    val resultArray: Array<Array<Int>> = inputTableArray(startArray, 3) ?: return
 
     println("Получившаяся таблица: ")
 
-    printTableArray(resultArray!!)
+    printTableArray(resultArray)
 
     val result = countUniqueDigitsIn(resultArray)
 
@@ -53,7 +53,7 @@ fun main() {
 }
 
 private fun countUniqueDigitsIn(targetArray: Array<Array<Int>>): Int {
-    var uniqueDigits = mutableListOf<Char>()
+    val uniqueDigits = mutableListOf<Char>()
 
     for (i in 0..targetArray.size-1) {
         for (j in 0..targetArray[i].size-1) {

@@ -1,8 +1,6 @@
-import java.lang.Exception
-
 /////////////////////////////////////////////
 //
-// Практическая №1. Массивы, коллекции
+// Практическая №2. Массивы, коллекции
 // Выполнили Турчанинов А.Е.
 // Политехнический колледж городского хозяйства
 // Группа: ИП-23-3
@@ -43,7 +41,7 @@ fun main() {
 }
 
 private fun createUnion(firstArray: Array<Int>, secondArray: Array<Int>): Array<Int> {
-    var newArray = mutableListOf<Int>()
+    val newArray = mutableListOf<Int>()
 
     for (i in 0..firstArray.size-1) {
         if (secondArray.contains(firstArray[i])) {
@@ -51,7 +49,7 @@ private fun createUnion(firstArray: Array<Int>, secondArray: Array<Int>): Array<
         }
     }
 
-    var resultArray = Array(newArray.size) { 0 }
+    val resultArray = Array(newArray.size) { 0 }
     for (i in 0..newArray.size-1) {
         resultArray[i] = newArray[i]
     }

@@ -1,8 +1,6 @@
-import java.lang.Exception
-
 /////////////////////////////////////////////
 //
-// Практическая №1. Массивы, коллекции
+// Практическая №2. Массивы, коллекции
 // Выполнили Турчанинов А.Е.
 // Политехнический колледж городского хозяйства
 // Группа: ИП-23-3
@@ -23,24 +21,95 @@ fun main() {
         Зашифрованный текст - АЁФИРХЖСЮ"""
     )
 
-    var keyWord = ""
-    var targetWord = ""
-    var decodedWord = ""
+    val letterNumber = mapOf(
+        'А' to 21, 'Б' to 13, 'В' to 4, 'Г' to 20, 'Д' to 22, 'Е' to 1, 'Ё' to 25, 'Ж' to 12, 'З' to 24, 'И' to 14, 'Й' to 2,
+        'К' to 28, 'Л' to 9, 'М' to 23, 'Н' to 3, 'О' to 29, 'П' to 6, 'Р' to 16, 'С' to 15, 'Т' to 11, 'У' to 26, 'Ф' to 5,
+        'Х' to 30, 'Ц' to 27, 'Ч' to 8, 'Ш' to 18, 'Щ' to 10, 'Ь' to 33, 'Ы' to 31, 'Ъ' to 32, 'Э' to 19, 'Ю' to 7, 'Я' to 17,
+    )
 
-    println("Получившаяся таблица: ")
+    val numberLetter = letterNumber.entries.associate { it.value to it.key }
 
-}
+    println(
+        """
+        Выберете действие:
+        1 - закодировать
+        2 - декодировать"""
+    )
 
-private fun isSimetrical(targetArray: Array<Array<Int>>): Boolean {
-    var state = true
+    val chosenOperation = readln()
 
-    for (i in 0..targetArray.size-1) {
-        for (j in 0..targetArray[i].size-1) {
-           if (targetArray[i][j] != targetArray[j][i]) {
-               state = false
-           }
-        }
+    if (chosenOperation != "1" && chosenOperation != "2") {
+        print("Вводить только числа - ")
+        return
     }
 
-    return state
+    println("Введите кодовое слово: ")
+    val keyWord = readln()
+    println("Введите ваше слово: ")
+    val targetWord = readln()
+
+    val decodedWord = if (chosenOperation == "1") {
+        encode(keyWord, targetWord, letterNumber, numberLetter)
+    } else {
+        decode(keyWord, targetWord, letterNumber, numberLetter)
+    }
+
+    if (decodedWord != "") {
+        println("Зашифрованный текст : $decodedWord")
+    }
+}
+
+private fun encode(keyWord: String, targetWord: String, letterNumber: Map<Char, Int>, numberLetter: Map<Int, Char>): String {
+    var result = ""
+
+    for (i in 0 .. targetWord.length-1) {
+        val letter = targetWord[i]
+        val currentLetterForKeyWord = keyWord[i % keyWord.length]
+
+        val letterIndex: Int
+        val codeIndex: Int
+
+        try {
+            letterIndex = letterNumber[letter.uppercaseChar()] ?: throw Exception()
+            codeIndex = letterNumber[currentLetterForKeyWord.uppercaseChar()] ?: throw Exception()
+        } catch (_: Exception) {
+            print("Вводить символы русского алфавита")
+            return ""
+        }
+
+        val resultIndex = letterIndex + codeIndex
+        result += numberLetter[resultIndex % letterNumber.size]
+    }
+
+    return result
+}
+
+private fun decode(keyWord: String, targetWord: String, letterNumber: Map<Char, Int>, numberLetter: Map<Int, Char>): String {
+    var result = ""
+
+    for (i in 0 .. targetWord.length-1) {
+        val letter = targetWord[i]
+        val currentLetterForKeyWord = keyWord[i % keyWord.length]
+
+        val letterIndex: Int
+        val codeIndex: Int
+
+        try {
+            letterIndex = letterNumber[letter.uppercaseChar()] ?: throw Exception()
+            codeIndex = letterNumber[currentLetterForKeyWord.uppercaseChar()] ?: throw Exception()
+        } catch (_: Exception) {
+            print("Вводить символы русского алфавита")
+            return ""
+        }
+
+        var resultIndex = letterIndex - codeIndex
+
+        if (resultIndex <= 0) {
+            resultIndex += letterNumber.size
+        }
+
+        result += numberLetter[resultIndex % letterNumber.size]
+    }
+
+    return result
 }

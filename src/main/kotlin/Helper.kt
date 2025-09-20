@@ -11,7 +11,7 @@ import java.security.InvalidParameterException
 //
 /////////////////////////////////////////////
 
-public fun inputTableArray(targetArray: Array<Array<Int>>, elementSize: Int?): Array<Array<Int>>? {
+fun inputTableArray(targetArray: Array<Array<Int>>, elementSize: Int?): Array<Array<Int>>? {
     for (i in 0..targetArray.size-1) {
         for (j in 0..targetArray[i].size-1) {
             print("${i+1}-ая строка, ${j+1}-й столбец: ")
@@ -22,7 +22,7 @@ public fun inputTableArray(targetArray: Array<Array<Int>>, elementSize: Int?): A
                         throw InvalidParameterException()
                     }
                 }
-                targetArray[i][j] = response.toInt();
+                targetArray[i][j] = response.toInt()
 
 
             } catch (_: Exception) {
@@ -33,14 +33,14 @@ public fun inputTableArray(targetArray: Array<Array<Int>>, elementSize: Int?): A
         println()
     }
 
-    return targetArray;
+    return targetArray
 }
 
-public fun input1DArray(): Array<Int>? {
-    val response = readlnOrNull() ?: "";
+fun input1DArray(): Array<Int>? {
+    val response = readlnOrNull() ?: ""
     val potentionalNumbers = response.split(" ")
 
-    var resultArray = Array(potentionalNumbers.size) { 0 }
+    val resultArray = Array(potentionalNumbers.size) { 0 }
 
     for (i in 0..potentionalNumbers.size-1) {
         try {
@@ -56,11 +56,11 @@ public fun input1DArray(): Array<Int>? {
     return resultArray
 }
 
-public fun inputStringArray(): Array<String> {
-    val response = readlnOrNull() ?: "";
+fun inputStringArray(): Array<String> {
+    val response = readlnOrNull() ?: ""
     val splitResponse = response.split(" ")
 
-    var resultArray = Array<String>(splitResponse.size) { "" }
+    val resultArray = Array<String>(splitResponse.size) { "" }
 
     for (i in 0..splitResponse.size-1) {
             resultArray[i] = splitResponse[i]
@@ -69,26 +69,26 @@ public fun inputStringArray(): Array<String> {
     return resultArray
 }
 
-public fun printTableArray(targetArray: Array<Array<Int>>) {
+fun printTableArray(targetArray: Array<Array<Int>>) {
     for (i in 0..targetArray.size-1) {
         targetArray[i].forEach { print("$it\t") }
         println()
     }
 }
 
-public fun printTableStringArray(targetArray: Array<Array<String>>) {
+fun printTableStringArray(targetArray: Array<Array<String>>) {
     for (i in 0..targetArray.size-1) {
         targetArray[i].forEach { print("$it\t") }
         println()
     }
 }
 
-public fun print1DArray(targetArray: Array<Int>) {
+fun print1DArray(targetArray: Array<Int>) {
     targetArray.forEach { print("$it\t") }
     println()
 }
 
-public fun printStringArray(targetArray: Array<String>) {
+fun printStringArray(targetArray: Array<String>) {
     targetArray.forEach { print("$it\t") }
     println()
 }
